@@ -49,6 +49,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""36fff604-a9d3-48dd-bbb3-ba0791d59344"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +103,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""RotateZ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f9e5aa7-b78d-4f7a-9cac-a015b52142db"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -113,6 +132,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Gameplay_MoveZ = m_Gameplay.FindAction("MoveZ", throwIfNotFound: true);
         m_Gameplay_RotateX = m_Gameplay.FindAction("RotateX", throwIfNotFound: true);
         m_Gameplay_RotateZ = m_Gameplay.FindAction("RotateZ", throwIfNotFound: true);
+        m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -166,6 +186,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MoveZ;
     private readonly InputAction m_Gameplay_RotateX;
     private readonly InputAction m_Gameplay_RotateZ;
+    private readonly InputAction m_Gameplay_Fire;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -174,6 +195,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @MoveZ => m_Wrapper.m_Gameplay_MoveZ;
         public InputAction @RotateX => m_Wrapper.m_Gameplay_RotateX;
         public InputAction @RotateZ => m_Wrapper.m_Gameplay_RotateZ;
+        public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -195,6 +217,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @RotateZ.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateZ;
                 @RotateZ.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateZ;
                 @RotateZ.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateZ;
+                @Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -211,6 +236,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @RotateZ.started += instance.OnRotateZ;
                 @RotateZ.performed += instance.OnRotateZ;
                 @RotateZ.canceled += instance.OnRotateZ;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMoveZ(InputAction.CallbackContext context);
         void OnRotateX(InputAction.CallbackContext context);
         void OnRotateZ(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }
