@@ -57,6 +57,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""e95b2b11-6d8a-44ce-844d-534463e55b0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -114,6 +122,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3166679-c000-4156-a304-c301eb1e66ef"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +152,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Gameplay_RotateX = m_Gameplay.FindAction("RotateX", throwIfNotFound: true);
         m_Gameplay_RotateZ = m_Gameplay.FindAction("RotateZ", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
+        m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -187,6 +207,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_RotateX;
     private readonly InputAction m_Gameplay_RotateZ;
     private readonly InputAction m_Gameplay_Fire;
+    private readonly InputAction m_Gameplay_Dash;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -196,6 +217,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @RotateX => m_Wrapper.m_Gameplay_RotateX;
         public InputAction @RotateZ => m_Wrapper.m_Gameplay_RotateZ;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
+        public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -220,6 +242,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -239,6 +264,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -259,5 +287,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnRotateX(InputAction.CallbackContext context);
         void OnRotateZ(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
