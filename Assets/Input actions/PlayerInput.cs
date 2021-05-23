@@ -65,6 +65,38 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveW"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7b8c8f5-9c9e-4c9f-80f7-e51421517a82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveA"",
+                    ""type"": ""Button"",
+                    ""id"": ""d735aa00-6ee6-4c40-aae5-990d2b85431d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveS"",
+                    ""type"": ""Button"",
+                    ""id"": ""466ab4e7-3c5a-4bca-b0df-58ded440e104"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveD"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cb858f1-9981-43d3-9707-76a8e08d3a88"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -125,12 +157,78 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""34f39089-efd4-43c1-a82d-b5232ce10bd5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b3166679-c000-4156-a304-c301eb1e66ef"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81278712-c17b-40b6-8130-7f18206cf98d"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d154070b-ab79-45c0-b745-fa74c98ec98f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveW"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85a06506-10e5-450b-99eb-fe423ad2685c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7124ae8-6c61-4ae8-98f9-a8f511fbd290"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd3b2f74-dde2-45e6-8d40-3da235d68c47"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -141,6 +239,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             ""name"": ""Gamepad"",
             ""bindingGroup"": ""Gamepad"",
+            ""devices"": []
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
             ""devices"": []
         }
     ]
@@ -153,6 +256,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Gameplay_RotateZ = m_Gameplay.FindAction("RotateZ", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_MoveW = m_Gameplay.FindAction("MoveW", throwIfNotFound: true);
+        m_Gameplay_MoveA = m_Gameplay.FindAction("MoveA", throwIfNotFound: true);
+        m_Gameplay_MoveS = m_Gameplay.FindAction("MoveS", throwIfNotFound: true);
+        m_Gameplay_MoveD = m_Gameplay.FindAction("MoveD", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -208,6 +315,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_RotateZ;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_MoveW;
+    private readonly InputAction m_Gameplay_MoveA;
+    private readonly InputAction m_Gameplay_MoveS;
+    private readonly InputAction m_Gameplay_MoveD;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -218,6 +329,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @RotateZ => m_Wrapper.m_Gameplay_RotateZ;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @MoveW => m_Wrapper.m_Gameplay_MoveW;
+        public InputAction @MoveA => m_Wrapper.m_Gameplay_MoveA;
+        public InputAction @MoveS => m_Wrapper.m_Gameplay_MoveS;
+        public InputAction @MoveD => m_Wrapper.m_Gameplay_MoveD;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -245,6 +360,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @MoveW.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveW;
+                @MoveW.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveW;
+                @MoveW.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveW;
+                @MoveA.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveA;
+                @MoveA.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveA;
+                @MoveA.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveA;
+                @MoveS.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveS;
+                @MoveS.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveS;
+                @MoveS.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveS;
+                @MoveD.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
+                @MoveD.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
+                @MoveD.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -267,6 +394,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @MoveW.started += instance.OnMoveW;
+                @MoveW.performed += instance.OnMoveW;
+                @MoveW.canceled += instance.OnMoveW;
+                @MoveA.started += instance.OnMoveA;
+                @MoveA.performed += instance.OnMoveA;
+                @MoveA.canceled += instance.OnMoveA;
+                @MoveS.started += instance.OnMoveS;
+                @MoveS.performed += instance.OnMoveS;
+                @MoveS.canceled += instance.OnMoveS;
+                @MoveD.started += instance.OnMoveD;
+                @MoveD.performed += instance.OnMoveD;
+                @MoveD.canceled += instance.OnMoveD;
             }
         }
     }
@@ -280,6 +419,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
     public interface IGameplayActions
     {
         void OnMoveX(InputAction.CallbackContext context);
@@ -288,5 +436,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnRotateZ(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMoveW(InputAction.CallbackContext context);
+        void OnMoveA(InputAction.CallbackContext context);
+        void OnMoveS(InputAction.CallbackContext context);
+        void OnMoveD(InputAction.CallbackContext context);
     }
 }

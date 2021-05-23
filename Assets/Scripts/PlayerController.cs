@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed, reloadTime, dash;
     [SerializeField] private Transform bullet, bulletSpawn;
     private PlayerInput pi;
-    private float timer, dashTimer;
-    private bool fireStart;
+    private float timer, dashTimer, dirX, dirZ;
+    private bool moveW, moveA, moveS, moveD, fireStart;
 
     private void Awake()
     {
@@ -17,7 +17,20 @@ public class PlayerController : MonoBehaviour
         pi = new PlayerInput();
         pi.Gameplay.Fire.performed += context => fireStart = true;
         pi.Gameplay.Fire.canceled += context => fireStart = false;
-        pi.Gameplay.Dash.started += context => dashTimer = dash; ;
+
+        pi.Gameplay.Dash.started += context => dashTimer = dash;
+
+        pi.Gameplay.MoveW.started += context => moveW = true;
+        pi.Gameplay.MoveW.canceled += context => moveW = false;
+
+        pi.Gameplay.MoveA.started += context => moveA = true;
+        pi.Gameplay.MoveA.canceled += context => moveA = false;
+
+        pi.Gameplay.MoveS.started += context => moveS = true;
+        pi.Gameplay.MoveS.canceled += context => moveS = false;
+
+        pi.Gameplay.MoveD.started += context => moveD = true;
+        pi.Gameplay.MoveD.canceled += context => moveD = false;
     }
     private void OnEnable()
     { pi.Enable(); }
@@ -30,20 +43,43 @@ public class PlayerController : MonoBehaviour
     {
         //Reload timer
         if (timer >= 0) timer -= Time.fixedDeltaTime;
-        //if (dashTimer >= 0) dashTimer -= Time.fixedDeltaTime;
+        CountDirection();
         //Moving and rotating
-        float moveX = pi.Gameplay.MoveX.ReadValue<float>();
-        float moveZ = pi.Gameplay.MoveZ.ReadValue<float>();
         float rotateY = pi.Gameplay.RotateX.ReadValue<float>();
-        rb.velocity = new Vector3(moveX * speed, rb.velocity.y, moveZ * speed);
         transform.Rotate(0f, rotateY * speed, 0f);
+        rb.velocity = new Vector3(dirX * speed, rb.velocity.y, dirZ * speed);
         if (dashTimer >= 0)
         {
+            //Debug.Log(1);
             dashTimer -= Time.fixedDeltaTime;
-            rb.velocity = new Vector3(moveX * speed * 10, rb.velocity.y, moveZ * speed * 10);
+            rb.velocity = new Vector3(dirX * speed * 10, rb.velocity.y, dirZ * speed * 10);
         }
+        dirX = 0;
+        dirZ = 0;
+        Move();
         //Fire
         if (fireStart && timer < 0) Fire();
+        Debug.Log(dashTimer);
+    }
+
+    private void CountDirection()
+    {
+        if (moveW | moveA | moveS | moveD)
+        {
+            if (moveW && dirZ < 1) dirZ++;
+            if (moveA && dirX > -1) dirX--;
+            if (moveS && dirZ > -1) dirZ--;
+            if (moveD && dirX < 1) dirX++;
+        }
+        else
+        {
+            dirX = pi.Gameplay.MoveX.ReadValue<float>();
+            dirZ = pi.Gameplay.MoveZ.ReadValue<float>();
+        }
+    }
+    private void Move()
+    {
+        
     }
 
     private void Fire()

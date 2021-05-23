@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433178356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 1747015575}
   - component: {fileID: 1747015574}
   - component: {fileID: 1747015579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +586,7 @@ MonoBehaviour:
   rb: {fileID: 1747015574}
   speed: 5
   reloadTime: 0.1
-  dash: 0
+  dash: 0.05
   bullet: {fileID: 4352375010372993055, guid: f60c47cf5de8ec8419c6787c6e79d952, type: 3}
   bulletSpawn: {fileID: 433178356}
 --- !u!1001 &1683955350142961611
@@ -643,6 +643,10 @@ PrefabInstance:
     - target: {fileID: 1683955351827482120, guid: f90d09612a2d8444aa5e7e17feea4a21, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683955351827482120, guid: f90d09612a2d8444aa5e7e17feea4a21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1683955351827482127, guid: f90d09612a2d8444aa5e7e17feea4a21, type: 3}
       propertyPath: plane
