@@ -22,7 +22,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""MoveX"",
                     ""type"": ""Value"",
                     ""id"": ""0804ee16-a1c6-4cf2-ae6e-e73f7e0fd902"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -97,6 +97,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""4922582b-6920-4e09-a701-f48974796979"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -112,6 +120,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""X"",
+                    ""id"": ""0361029f-c2c5-4753-8df6-53def870bd73"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c1355b03-2c77-4169-8c45-d7b0550052ab"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6e1b22a5-a269-44d1-92c8-88e0f7c56c1e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""b9cdc21c-8287-4a31-a113-c4228a2b56b4"",
                     ""path"": ""<Gamepad>/leftStick/y"",
@@ -121,6 +162,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""MoveZ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Z"",
+                    ""id"": ""ef5ddd54-ddff-4090-946e-f309f05fbe4d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveZ"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e857d3de-1569-4b9a-8cdf-edc0691cda05"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6b11945b-dcac-4acd-9af5-00678e37cb0d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -158,7 +232,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""34f39089-efd4-43c1-a82d-b5232ce10bd5"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -231,6 +305,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""MoveD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a128f58-8ac4-41ae-bd33-90b381e112c8"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +345,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Gameplay_MoveA = m_Gameplay.FindAction("MoveA", throwIfNotFound: true);
         m_Gameplay_MoveS = m_Gameplay.FindAction("MoveS", throwIfNotFound: true);
         m_Gameplay_MoveD = m_Gameplay.FindAction("MoveD", throwIfNotFound: true);
+        m_Gameplay_Mouse = m_Gameplay.FindAction("Mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -319,6 +405,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MoveA;
     private readonly InputAction m_Gameplay_MoveS;
     private readonly InputAction m_Gameplay_MoveD;
+    private readonly InputAction m_Gameplay_Mouse;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -333,6 +420,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @MoveA => m_Wrapper.m_Gameplay_MoveA;
         public InputAction @MoveS => m_Wrapper.m_Gameplay_MoveS;
         public InputAction @MoveD => m_Wrapper.m_Gameplay_MoveD;
+        public InputAction @Mouse => m_Wrapper.m_Gameplay_Mouse;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -372,6 +460,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveD.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
                 @MoveD.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
                 @MoveD.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveD;
+                @Mouse.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                @Mouse.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                @Mouse.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -406,6 +497,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveD.started += instance.OnMoveD;
                 @MoveD.performed += instance.OnMoveD;
                 @MoveD.canceled += instance.OnMoveD;
+                @Mouse.started += instance.OnMouse;
+                @Mouse.performed += instance.OnMouse;
+                @Mouse.canceled += instance.OnMouse;
             }
         }
     }
@@ -440,5 +534,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMoveA(InputAction.CallbackContext context);
         void OnMoveS(InputAction.CallbackContext context);
         void OnMoveD(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
     }
 }
