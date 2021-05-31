@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed, reloadTime, dash;
     [SerializeField] private Transform bullet, bulletSpawn;
     private PlayerInput pi;
-    private float timer, dashTimer, dirX, dirZ;
+    private float timer, dashTimer, dirX, dirZ, mousePos;
     private bool fireStart;
-    private Vector2 mousePos, prevMousePos;
 
     private void Awake()
     {
@@ -19,6 +18,7 @@ public class PlayerController : MonoBehaviour
         pi.Gameplay.Fire.performed += context => fireStart = true;
         pi.Gameplay.Fire.canceled += context => fireStart = false;
         pi.Gameplay.Dash.started += context => dashTimer = dash;
+        pi.Gameplay.Exit.performed += context => Application.Quit();
     }
     private void OnEnable()
     { pi.Enable(); }
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     { pi.Disable(); }
     void Start()
     {
-        prevMousePos = pi.Gameplay.Mouse.ReadValue<Vector2>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void FixedUpdate()
     {
@@ -38,9 +38,8 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, rotateY * speed, 0f);
 
         //Rotating(Mouse)
-        prevMousePos = mousePos;
-        mousePos = pi.Gameplay.Mouse.ReadValue<Vector2>();
-        transform.Rotate(0f, (mousePos.x - prevMousePos.x) / 5, 0f);
+        mousePos = pi.Gameplay.Mouse.ReadValue<float>();
+        transform.Rotate(0f, mousePos * Time.fixedDeltaTime * 10f, 0f);
         
 
         //Moving

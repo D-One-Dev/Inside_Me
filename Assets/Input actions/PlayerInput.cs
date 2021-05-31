@@ -102,7 +102,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Mouse"",
                     ""type"": ""Value"",
                     ""id"": ""4922582b-6920-4e09-a701-f48974796979"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""f475b193-1586-43fc-b90e-a8ebdb6b0c7c"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -309,11 +317,33 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3a128f58-8ac4-41ae-bd33-90b381e112c8"",
-                    ""path"": ""<Mouse>/position"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e258b3dd-610b-4714-949f-176c9059b54c"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54173a59-21fe-40c3-9fa6-5a16fb2dc6a7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -346,6 +376,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Gameplay_MoveS = m_Gameplay.FindAction("MoveS", throwIfNotFound: true);
         m_Gameplay_MoveD = m_Gameplay.FindAction("MoveD", throwIfNotFound: true);
         m_Gameplay_Mouse = m_Gameplay.FindAction("Mouse", throwIfNotFound: true);
+        m_Gameplay_Exit = m_Gameplay.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -406,6 +437,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MoveS;
     private readonly InputAction m_Gameplay_MoveD;
     private readonly InputAction m_Gameplay_Mouse;
+    private readonly InputAction m_Gameplay_Exit;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -421,6 +453,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @MoveS => m_Wrapper.m_Gameplay_MoveS;
         public InputAction @MoveD => m_Wrapper.m_Gameplay_MoveD;
         public InputAction @Mouse => m_Wrapper.m_Gameplay_Mouse;
+        public InputAction @Exit => m_Wrapper.m_Gameplay_Exit;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -463,6 +496,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Mouse.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
                 @Mouse.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
                 @Mouse.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                @Exit.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -500,6 +536,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Mouse.started += instance.OnMouse;
                 @Mouse.performed += instance.OnMouse;
                 @Mouse.canceled += instance.OnMouse;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
         }
     }
@@ -535,5 +574,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMoveS(InputAction.CallbackContext context);
         void OnMoveD(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

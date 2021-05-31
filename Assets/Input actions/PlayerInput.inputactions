@@ -89,7 +89,15 @@
                     "name": "Mouse",
                     "type": "Value",
                     "id": "4922582b-6920-4e09-a701-f48974796979",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "f475b193-1586-43fc-b90e-a8ebdb6b0c7c",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -296,11 +304,33 @@
                 {
                     "name": "",
                     "id": "3a128f58-8ac4-41ae-bd33-90b381e112c8",
-                    "path": "<Mouse>/position",
+                    "path": "<Mouse>/delta/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e258b3dd-610b-4714-949f-176c9059b54c",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54173a59-21fe-40c3-9fa6-5a16fb2dc6a7",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

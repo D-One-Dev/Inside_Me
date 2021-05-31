@@ -45,6 +45,12 @@ public class EnemyController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player") canvas.GetComponent<TextController>().DecreaseHealth(1);
+        if (collision.gameObject.tag == "Player")
+        { 
+            canvas.GetComponent<TextController>().DecreaseHealth(1);
+            Vector3 spawnPoint = new Vector3(Random.Range(plane.position.x - plane.localScale.x, plane.position.x + plane.localScale.x), this.transform.position.y, Random.Range(plane.position.z - plane.localScale.z, plane.position.z + plane.localScale.z));
+            Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }
